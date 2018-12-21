@@ -8,31 +8,14 @@ const siteUrl = process.env.MP_URL || 'https://nearme-example.staging-oregon.nea
 const options = {
   filterLevel: 0,
   honorRobotExclusions: false,
-  rateLimit: 100,
-  exclude: 'localhost',
-  maxSockets: 5
+  rateLimit: 50,
+  maxSockets: 3
 };
 
 const customData = {
   failed: [],
-  succeeded: []
-};
-
-const report = ({ failed, succeeded }) => {
-  if (failed.length === 0) {
-    console.log(success(`All links are working correctly at ${siteUrl}`));
-    process.exit(0);
-  } else {
-    console.log(success(`Number of correctly working links: ${succeeded.length}`));
-
-    console.log(error(`Broken links (${failed.length}):`));
-
-    failed.forEach(fail => {
-      console.log(error(`\t${blc[fail.brokenReason]} :: ${fail.url.resolved}`));
-    });
-
-    process.exit(1);
-  }
+  succeeded: [],
+  index: 1
 };
 
 const siteChecker = new blc.SiteChecker(options, {
@@ -42,10 +25,24 @@ const siteChecker = new blc.SiteChecker(options, {
     } else {
       customData.succeeded.push(result);
     }
-    console.log('.');
+
+    console.log(`[${customData.index}] Checking ${result.url.resolved}`);
   },
   end: function() {
-    report(customData);
+    if (customData.failed.length === 0) {
+      console.log(success(`All links are working correctly at ${siteUrl}`));
+      process.exit(0);
+    } else {
+      console.log(success(`Number of correctly working links: ${customData.succeeded.length}`));
+
+      console.log(error(`Broken links (${customData.failed.length}):`));
+
+      customData.failed.forEach(fail => {
+        console.log(error(`\t${blc[fail.brokenReason]} :: ${fail.url.resolved}`));
+      });
+
+      process.exit(1);
+    }
   }
 });
 
