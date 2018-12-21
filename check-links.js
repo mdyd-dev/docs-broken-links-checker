@@ -8,9 +8,9 @@ const siteUrl = process.env.MP_URL || 'https://nearme-example.staging-oregon.nea
 const options = {
   filterLevel: 0,
   honorRobotExclusions: false,
-  rateLimit: 100,
-  excludedKeywords: ['*api-reference/graphql/g*'], // there is too much noise in there
-  maxSockets: 5
+  // rateLimit: 100, // default: 0
+  excludedKeywords: ['*api-reference/*'], // there is too much noise in there
+  maxSockets: 20
 };
 
 const customData = {
@@ -33,6 +33,9 @@ const siteChecker = new blc.SiteChecker(options, {
       console.log(`[${customData.index}]\t ${isOK} ${result.url.resolved}`);
       customData.index = customData.index + 1;
     }
+  },
+  page: function(error, pageUrl) {
+    console.log(`Finished page: ${pageUrl}`);
   },
   end: function() {
     if (customData.failed.length === 0) {
