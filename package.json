@@ -1,0 +1,15 @@
+{
+  "name": "docs-broken-links-checker",
+  "version": "1.0.0",
+  "description": "Check broken links for documentation project",
+  "scripts": {
+    "test": "node check-links.js"
+  },
+  "repository": "mdyd-dev/docs-broken-links-checker",
+  "author": "Paweł Kowalski <pavelloz@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "broken-link-checker": "^0.7.8",
+    "chalk": "^2.4.1"
+  }
+}
