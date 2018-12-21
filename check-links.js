@@ -8,9 +8,9 @@ const siteUrl = process.env.MP_URL || 'https://nearme-example.staging-oregon.nea
 const options = {
   filterLevel: 0,
   honorRobotExclusions: false,
-  rateLimit: 50,
-  exclude: '*api-reference/graphql/g*', // there is too much noise in there
-  maxSockets: 3
+  rateLimit: 100,
+  excludedKeywords: ['*api-reference/graphql/g*'], // there is too much noise in there
+  maxSockets: 5
 };
 
 const customData = {
