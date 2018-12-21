@@ -27,6 +27,7 @@ const siteChecker = new blc.SiteChecker(options, {
     }
 
     console.log(`[${customData.index}] Checking ${result.url.resolved}`);
+    customData.index = customData.index + 1;
   },
   end: function() {
     if (customData.failed.length === 0) {
@@ -40,6 +41,8 @@ const siteChecker = new blc.SiteChecker(options, {
       customData.failed.forEach(fail => {
         console.log(error(`\t${blc[fail.brokenReason]} :: ${fail.url.resolved}`));
       });
+
+      console.log(`Checked links in total: ${customData.index}`);
 
       process.exit(1);
     }
