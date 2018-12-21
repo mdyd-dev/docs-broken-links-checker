@@ -27,10 +27,12 @@ const siteChecker = new blc.SiteChecker(options, {
       customData.succeeded.push(result);
     }
 
-    const isOK = result.broken ? error('[BROKEN]') : success('[OK]');
+    if (!result.http.cached) {
+      const isOK = result.broken ? error('[BROKEN]') : success('[OK]');
 
-    console.log(`[${customData.index}]\t ${isOK} ${result.url.resolved}`);
-    customData.index = customData.index + 1;
+      console.log(`[${customData.index}]\t ${isOK} ${result.url.resolved}`);
+      customData.index = customData.index + 1;
+    }
   },
   end: function() {
     if (customData.failed.length === 0) {
