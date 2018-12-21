@@ -9,6 +9,7 @@ const options = {
   filterLevel: 0,
   honorRobotExclusions: false,
   rateLimit: 50,
+  exclude: '*api-reference/graphql/g*', // there is too much noise in there
   maxSockets: 3
 };
 
