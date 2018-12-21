@@ -26,7 +26,9 @@ const siteChecker = new blc.SiteChecker(options, {
       customData.succeeded.push(result);
     }
 
-    console.log(`[${customData.index}] Checking ${result.url.resolved}`);
+    const isOK = result.broken ? error('[BROKEN]') : success('[OK]');
+
+    console.log(`[${customData.index}]\t ${isOK} ${result.url.resolved}`);
     customData.index = customData.index + 1;
   },
   end: function() {
