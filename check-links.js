@@ -42,6 +42,7 @@ const siteChecker = new blc.SiteChecker(options, {
     } else {
       customData.succeeded.push(result);
     }
+    console.log('.');
   },
   end: function() {
     report(customData);
