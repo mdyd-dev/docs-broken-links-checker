@@ -9,7 +9,7 @@ const options = {
   filterLevel: 0,
   honorRobotExclusions: false,
   // rateLimit: 100, // default: 0
-  excludedKeywords: ['*api-reference/*'], // there is too much noise in there
+  excludedKeywords: ['*api-reference/*', 'localhost'], // there is too much noise in there
   maxSockets: 20
 };
 
