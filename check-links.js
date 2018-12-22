@@ -26,7 +26,7 @@ const siteChecker = new blc.SiteChecker(options, {
     if (result.broken) {
       console.log(error(`[BROKEN] ${result.url.original} @ ${result.base.resolved}`));
       customData.failed.push(result);
-    } else {
+    } else if (!result.http.cached) {
       customData.succeeded.push(result);
     }
   },
