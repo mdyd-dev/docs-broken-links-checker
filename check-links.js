@@ -1,5 +1,6 @@
 const blc = require('broken-link-checker');
 const chalk = require('chalk');
+const fs = require('fs');
 const success = chalk.green;
 const error = chalk.red;
 
@@ -23,13 +24,7 @@ const customData = {
 const siteChecker = new blc.SiteChecker(options, {
   link: function(result, customData) {
     if (result.broken) {
-      console.log(
-        error(
-          `[BROKEN] Link: ${result.url.resolved} \
-          \n\t Page: ${result.base.resolved} \
-          \n\t Reason: ${blc[result.brokenReason]}`
-        )
-      );
+      console.log(error(`[BROKEN] ${result.url.original} @ ${result.base.resolved}`));
       customData.failed.push(result);
     } else {
       customData.succeeded.push(result);
@@ -38,12 +33,12 @@ const siteChecker = new blc.SiteChecker(options, {
   end: function() {
     console.log('');
     if (customData.failed.length === 0) {
-      console.log(success(`All links are working correctly at ${siteUrl}`));
+      const summary = `All links are working correctly at ${siteUrl}`;
+      fs.writeFileSync('test-summary.txt', summary); // summary will be forwarded to slack by jenkins
       process.exit(0);
     } else {
-      console.log(success(`Correct: ${customData.succeeded.length}`));
-      console.log(error(`Broken: ${customData.failed.length}`));
-
+      const summary = `Correct: ${customData.succeeded.length}` + '\n' + `Broken: ${customData.failed.length}`;
+      fs.writeFileSync('test-summary.txt', summary); // summary will be forwarded to slack by jenkins
       process.exit(1);
     }
   }

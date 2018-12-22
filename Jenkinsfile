@@ -28,11 +28,17 @@ pipeline {
 
       post {
         success {
-          slackSend (channel: "#pawel-test", color: '#00FF00', message: "SUCCESS: There are no broken links on staging")
+          script {
+            testOutput = sh(returnStdout: true, script: 'cat test-summary.txt').trim()
+          }
+          slackSend (channel: "#pawel-test", color: '#00FF00', message: "SUCCESS: There are no broken links on staging.\n${testOutput}")
         }
 
         failure {
-          slackSend (channel: "#pawel-test", color: '#FF0000', message: "FAILED: Found broken links on staging (<${env.BUILD_URL}|Open details>)")
+          script {
+            testOutput = sh(returnStdout: true, script: 'cat test-summary.txt').trim()
+          }
+          slackSend (channel: "#pawel-test", color: '#FF0000', message: "FAILED: Found broken links on staging (<${env.BUILD_URL}|Open details>)\n${testOutput}")
         }
       }
     }
