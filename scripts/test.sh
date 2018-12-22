@@ -1,3 +1,4 @@
 #!/bin/bash
 
-npm test
+npm test && \
+  cat test-summary.txt
