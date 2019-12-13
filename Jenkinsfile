@@ -23,7 +23,7 @@ pipeline {
       }
 
       steps {
-        sh 'bash -l ./scripts/test.sh'
+        sh 'sh ./scripts/test.sh'
       }
 
       post {
