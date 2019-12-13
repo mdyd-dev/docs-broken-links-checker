@@ -12,6 +12,7 @@ pipeline {
 
   stages {
     stage('Staging') {
+      agent { docker { image 'node:12-alpine'; args '-u root' } }
 
       environment {
         MP_URL = "https://documentation-staging.staging.oregon.platform-os.com"
@@ -22,7 +23,6 @@ pipeline {
       }
 
       steps {
-        sh 'bash -l ./scripts/install.sh'
         sh 'bash -l ./scripts/test.sh'
       }
 
