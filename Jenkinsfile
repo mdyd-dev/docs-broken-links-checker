@@ -23,6 +23,7 @@ pipeline {
       }
 
       steps {
+        sh 'npm ci'
         sh 'sh ./scripts/test.sh'
       }
 
