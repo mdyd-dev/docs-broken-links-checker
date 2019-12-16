@@ -10,7 +10,7 @@ const options = {
   filterLevel: 0,
   honorRobotExclusions: false,
   // rateLimit: 100, // default: 0
-  excludedKeywords: ['*api-reference/*', 'localhost', '*tablesgenerator.com*', '*sendgrid.api-docs.io*'],
+  excludedKeywords: ['*api-reference/*', 'localhost', '*tablesgenerator.com*', '*sendgrid.api-docs.io*', '*speedcurve.com'],
   maxSockets: 20,
   userAgent:
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36'
