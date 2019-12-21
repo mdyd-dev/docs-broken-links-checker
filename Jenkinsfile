@@ -39,7 +39,7 @@ pipeline {
           script {
             testOutput = sh(returnStdout: true, script: 'cat test-summary.txt').trim()
           }
-          slackSend (channel: "#notifications-docs", color: '#FF0000', message: "FAILED: ${testOutput}\n<${env.BUILD_URL}|Build details>")
+          slackSend (channel: "#notifications-docs", color: '#FF0000', message: "FAILED: \n${testOutput}\n<${env.BUILD_URL}|Build details>")
         }
       }
     }
