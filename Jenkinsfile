@@ -15,7 +15,7 @@ pipeline {
       agent { docker { image 'node:12-alpine'; args '-u root' } }
 
       environment {
-        MP_URL = "https://documentation-staging.staging.oregon.platform-os.com"
+        MP_URL = "https://documentation.platformos.com"
       }
 
       when {
