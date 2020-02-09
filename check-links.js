@@ -4,12 +4,12 @@ const fs = require('fs');
 const success = chalk.green;
 const error = chalk.red;
 
-const siteUrl = process.env.MP_URL || 'https://documentation-staging.staging.oregon.platform-os.com/';
+const siteUrl = process.env.MP_URL || 'https://documentation.platformos.com/';
 
 const options = {
   filterLevel: 0,
   honorRobotExclusions: false,
-  excludedKeywords: ['*tablesgenerator.com*'],
+  excludeExternalLinks: true,
   rateLimit: 50,
   maxSocketsPerHost: 15,
   userAgent:
